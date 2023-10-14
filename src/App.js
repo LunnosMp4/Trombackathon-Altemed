@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import LeafletMap from './map/leafletMap';
 import Papa from 'papaparse';
+import { Grid, Paper,  } from '@mui/material';
 
-import dataCsvPath from './datas/Residences.csv'
+import dataCsvPath from './datas/Résidences.csv'
+import Dashboard from './screens/dashboard/DashboardScreen';
+import DashboardScreen from './screens/dashboard/DashboardScreen';
 
 function App() {
   const [residencesDatas, setResidencesDatas] = useState([]);
@@ -56,7 +59,27 @@ function App() {
 
   return (
     <div className="App">
-      <LeafletMap residencesDatas={residencesDatas} />
+      <div>
+      <Grid
+        container
+        gap={10}
+        direction='row'
+        justifyContent='center'
+        alignItems='center'
+        sx={{ bgcolor: '#fff', height: '100vh' }}
+      >
+        <Grid item xs={7}>
+          <DashboardScreen residencesDatas={residencesDatas} />
+        </Grid>
+
+        <Grid item xs={4} sx={{ bgcolor: '#eeeeee', height: '90vh', borderRadius: 10, overflow: 'hidden' }}>
+          <Paper >
+            <LeafletMap residencesDatas={residencesDatas} />
+          </Paper>
+        </Grid>
+
+      </Grid>
+    </div>
     </div>
   );
 }

@@ -18,7 +18,7 @@ function LeafletMap({ residencesDatas }) {
 
   return (
     <div>
-      <MapContainer center={[43.6065089, 3.8917325]} zoom={13} minZoom={11} maxZoom={18} style={{ height: '100vh', width: '80%' }}>
+      <MapContainer center={[43.6065089, 3.8917325]} zoom={13} minZoom={11} maxZoom={18} style={{ height: '90vh', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
