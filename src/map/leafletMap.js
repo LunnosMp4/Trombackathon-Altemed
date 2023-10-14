@@ -6,6 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import MarkerClusterGroup from "react-leaflet-cluster";
 import MarkerInfo from './markerInfo';
 import { defaultMarker, activeMarker, redMarker, orangeMarker, yellowMarker, greenMarker } from '../constants/markerIcon';
+import './leafletMap.css'
 
 delete L.Icon.Default.prototype._getIconUrl;
 

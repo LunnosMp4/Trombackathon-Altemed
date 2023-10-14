@@ -1,0 +1,47 @@
+/*********** OpenStreetMap Custom ***************/
+
+.leaflet-touch .leaflet-control-layers, .leaflet-touch .leaflet-bar {
+    border: none;
+    user-select: none;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.leaflet-touch .leaflet-bar a:first-child {
+    border-radius: 5px 5px 0 0;
+}
+
+.leaflet-touch .leaflet-bar a:last-child {
+    border-radius: 0 0 5px 5px;
+}
+
+.leaflet-container .leaflet-control-attribution {
+    backdrop-filter: blur(20px);
+    background-color: #10121b66;
+    color: #f9fafbdd;
+    border-radius: 5px 0 0 0;
+}
+    .leaflet-container .leaflet-control-attribution a {
+        color: #c2d5e8dd;
+    }
+
+a.leaflet-control-zoom-in {
+    backdrop-filter: blur(20px);
+    background-color: #10121b66;
+    border-bottom: rgba(0, 0, 0, 0.2);
+    color: #f9fafbdd;
+}
+    a.leaflet-control-zoom-in:hover{
+        background-color: #8b8b8b50;
+        color: #10121b66;
+    }
+
+a.leaflet-control-zoom-out {
+    backdrop-filter: blur(20px);
+    background-color: #10121b66;
+    color: #f9fafbdd;
+}
+    a.leaflet-control-zoom-out:hover {
+        background-color: #8b8b8b50;
+        color: #10121b66;
+    }
