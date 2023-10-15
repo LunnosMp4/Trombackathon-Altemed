@@ -41,17 +41,17 @@ const DashboardScreen = ({
         <Grid item xs={1} sx={{ bgcolor: '#fff' }}>
           <List sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 20 }}>
             <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50, width: 200 }}>
-              <ListItemButton onClick={onSectorChange} sx={{ borderRadius: 10 }}>
+              <ListItemButton onClick={onSectorChange} sx={{ borderRadius: 10, textAlign: 'center' }}>
                 <ListItemText primary="Secteur" component="a" href="#simple-list"/>
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50, width: 200 }}>
-              <ListItemButton  sx={{ borderRadius: 10 }}>
+              <ListItemButton  sx={{ borderRadius: 10, textAlign: 'center' }}>
                 <ListItemText primary="Menu" component="b" href="#simple-list"/>
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50, width: 200 }}>
-              <ListItemButton onClick={onListViewChange} sx={{ borderRadius: 10 }}>
+              <ListItemButton onClick={onListViewChange} sx={{ borderRadius: 10, textAlign: 'center' }}>
                 <ListItemText primary="Liste des incidents" component="b" href="#simple-list"/>
               </ListItemButton>
             </ListItem>
