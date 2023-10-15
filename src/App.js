@@ -175,6 +175,7 @@ function App() {
             residencesDatas={residencesDatas}
             onBackToDashboard={handleHideListView}
             onCardClick={handleMarkerClick}
+            claimDatas21_22={claimDatas21_22}
           />
         ) : showSectorView ? (
           <SectorScreen

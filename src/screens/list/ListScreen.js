@@ -10,7 +10,7 @@ import swap_vert from '../../icons/swap_vert.png';
 import domain from "../../icons/domain.png";
 import cancel_rounded from "../../icons/cancel_rounded.png";
 
-const ListScreen = ({ residencesDatas, onBackToDashboard, onCardClick }) => {
+const ListScreen = ({ residencesDatas, onBackToDashboard, onCardClick, claimDatas21_22 }) => {
   const formatText = (str) => {
     return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
@@ -65,6 +65,43 @@ const ListScreen = ({ residencesDatas, onBackToDashboard, onCardClick }) => {
       return b.name.localeCompare(a.name);
     }
   });
+
+  const calculateImportance = (type, resolutionTime) => {
+    // Define the importance priority order
+    const importanceOrder = {
+      'Sécurité': 3, 'Santé / Hygiène': 3, 'Désinsec/Dérat/Désinfect': 3, 'Infiltration Etanchéité': 3,
+      'Eau Usée vanne pluviale': 3, 'Electricité': 3, 'Ascenseur': 3, 'Interphone/Portail': 3, 'Impayés': 3,
+      'Troubles de voisinage': 2, 'Facturation et Régul': 2, 'Gestion Clientèle': 2, 'Plomberie': 2,
+      'Demande RDV Internet': 2, 'Télévision': 2, 'Serrurerie': 2, 'Cadre de vie': 2, 'Espaces Verts': 2,
+      'Menuiserie': 1, 'Peinture': 1, 'Maçonnerie': 1, 'Nettoyage': 1, 'Fournitures/Location': 1,
+      'VMC': 1, 'Déménagement': 1, 'Epaves': 1, 'Câble': 1, 'Reprise DI': 1, 'Demande Diagnostic TEST': 1,
+    };
+
+    const importanceLevel = importanceOrder[type] || 0;
+
+    if (resolutionTime > 60) {
+      return Math.max(importanceLevel, 3);
+    }
+
+    if (resolutionTime > 30) {
+      return Math.min(importanceLevel + 1, 3);
+    }
+
+    return importanceLevel;
+  };
+
+  const countImportanceLevel3 = (residenceId) => {
+    const level3Complaints = claimDatas21_22.filter((claim) => {
+      const id = claim.id.replace(/^0+/, '');
+      if (id === residenceId) {
+        const importance = calculateImportance(claim.type, claim.resolutionTime);
+        return importance === 3;
+      }
+      return false;
+    });
+
+    return level3Complaints.length;
+  }
 
   return (
     <div className="containerList">
@@ -161,7 +198,7 @@ const ListScreen = ({ residencesDatas, onBackToDashboard, onCardClick }) => {
               <div className='chips-container'>
                 <div className='chips urgent'>
                   <img className="icon-chips" src={notifications} alt="Alert" />
-                  <p>5 incidents urgents</p>
+                  <p>{countImportanceLevel3(residence.id)} incidents urgents</p>
                 </div>
                 <div className='chips neutral'>
                   <p>QPV</p>
