@@ -52,7 +52,7 @@ const DashboardScreen = ({
             </ListItem>
             <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50, width: 200 }}>
               <ListItemButton onClick={onListViewChange} sx={{ borderRadius: 10 }}>
-                <ListItemText primary="LISTVIEW" component="b" href="#simple-list"/>
+                <ListItemText primary="Liste des incidents" component="b" href="#simple-list"/>
               </ListItemButton>
             </ListItem>
           </List>
