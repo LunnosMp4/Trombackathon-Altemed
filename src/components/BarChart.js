@@ -42,7 +42,7 @@ function BarChart({ chartData }) {
           legend: {
             labels: {
               font: {
-                size: 30, // Ajuste la taille de la police de la légende
+                size: 25, // Ajuste la taille de la police de la légende
               },
             },
           },

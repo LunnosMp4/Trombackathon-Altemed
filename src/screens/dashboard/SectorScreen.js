@@ -8,13 +8,13 @@ import { Grid, Paper, Avatar, CircularProgress, Typography, Box, List, ListItem,
 function CircularProgressWithLabel(props) {
 
   const getColorFromValue = (value) => {
-    if(value < 10) {
+    if(value/10 < 10) {
       return 'green';
-    } else if(value >= 10 && value < 30) {
+    } else if(value/10 >= 10 && value/10 < 30) {
       return 'yellow';
-    } else if(value >= 30 && value < 60) {
+    } else if(value/10 >= 30 && value/10 < 60) {
       return 'orange';
-    } else if(value >= 60) {
+    } else if(value/10 >= 60) {
       return 'red';
     } else {
       return 'grey';  // Optional: default color if value is out of expected range
@@ -108,18 +108,18 @@ const SectorScreen = ({ residencesDatas, claimDatas19_20, claimDatas21_22, onDas
       >
 
         <Grid item xs={1} sx={{ bgcolor: '#fff' }}>
-          <List sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-            <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50, mr: 2 }}>
+          <List sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', gap: 20 }}>
+            <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50, width: 200 }}>
               <ListItemButton sx={{ borderRadius: 10 }}>
                 <ListItemText primary="Secteur" component="a" href="#simple-list"/>
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50, mr: 2 }}>
+            <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50, width: 200 }}>
               <ListItemButton onClick={onDashboardChange} sx={{ borderRadius: 10 }}>
                 <ListItemText primary="Menu" component="b" href="#simple-list"/>
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50 }}>
+            <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50, width: 200 }}>
               <ListItemButton onClick={onListViewChange} sx={{ borderRadius: 10 }}>
                 <ListItemText primary="LISTVIEW" component="b" href="#simple-list"/>
               </ListItemButton>
