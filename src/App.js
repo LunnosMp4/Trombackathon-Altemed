@@ -4,7 +4,9 @@ import Papa from 'papaparse';
 import { Grid, Paper,  } from '@mui/material';
 
 import dataCsvPath from './datas/Résidences.csv'
-import Dashboard from './screens/dashboard/DashboardScreen';
+import dataCsvPath2019_2020 from './datas/Réclamations_2019_2020.csv'
+import dataCsvPath2021_2022 from './datas/Réclamations_2021_2022.csv'
+
 import DashboardScreen from './screens/dashboard/DashboardScreen';
 import ResidenceScreen from './screens/dashboard/ResidenceScreen';
 
@@ -12,6 +14,8 @@ import ResidenceScreen from './screens/dashboard/ResidenceScreen';
 
 function App() {
   const [residencesDatas, setResidencesDatas] = useState([]);
+  const [claimDatas19_20, setClaimDatas19_20] = useState([]);
+  const [claimDatas21_22, setClaimDatas21_22] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [followedResidences, setFollowedResidences] = useState([]);
 
@@ -19,9 +23,13 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await fetch(dataCsvPath);
+        const response2 = await fetch(dataCsvPath2019_2020);
+        const response3 = await fetch(dataCsvPath2021_2022);
 
-        if (response.ok) {
+        if (response.ok && response2.ok && response3.ok) {
           const csvData = await response.text();
+          const csvData2 = await response2.text();
+          const csvData3 = await response3.text();
 
           Papa.parse(csvData, {
             header: true,
@@ -49,7 +57,35 @@ function App() {
                 sup75: marker['>=75'],
               }));
 
+              const parsedClaim19_20 = result.data.map((marker) => ({
+                id: marker['Code Résidence ACM'],
+                claimId: marker['Code Réclamation ACM'],
+                category: marker[`Catégorie d'Affaire`],
+                type: marker[`Type d'Affaire`],
+                origin: marker[`Origine de l'Affaire`],
+                agencyCode: marker[`Code Agence ACM`],
+                year: marker[`Année`],
+                month: marker[`Mois`],
+                commitment: marker[`Engagement(Réparations)`],
+                resolutionTime: marker[`Délai de Résolution`],
+              }));
+
+              const parsedClaim21_22 = result.data.map((marker) => ({
+                id: marker['Code Résidence ACM'],
+                claimId: marker['Code Réclamation ACM'],
+                category: marker[`Catégorie d'Affaire`],
+                type: marker[`Type d'Affaire`],
+                origin: marker[`Origine de l'Affaire`],
+                agencyCode: marker[`Code Agence ACM`],
+                year: marker[`Année`],
+                month: marker[`Mois`],
+                commitment: marker[`Engagement(Réparations)`],
+                resolutionTime: marker[`Délai de Résolution`],
+              }));
+
               setResidencesDatas(parsedResidences);
+              setClaimDatas19_20(parsedClaim19_20);
+              setClaimDatas21_22(parsedClaim21_22);
             }
           });
         } else {
@@ -87,7 +123,11 @@ function App() {
               setFollowedResidences={setFollowedResidences}
             />
           ) : (
-            <DashboardScreen residencesDatas={residencesDatas} />
+            <DashboardScreen
+              residencesDatas={residencesDatas}
+              claimDatas19_20={claimDatas19_20}
+              claimDatas21_22={claimDatas21_22}
+            />
           )}
         </Grid>
 

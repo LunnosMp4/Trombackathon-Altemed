@@ -24,7 +24,7 @@ function LeafletMap({ residencesDatas, onMarkerClick, followedResidences }) {
 
   return (
     <div>
-      <MapContainer ref={mapRef} center={[43.6065089, 3.8917325]} zoom={13} minZoom={11} maxZoom={18} style={{ height: '90vh', width: '100%' }}>
+      <MapContainer ref={mapRef} center={[43.6065089, 3.8917325]} zoom={13} minZoom={11} maxZoom={18} style={{ height: '95vh', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
