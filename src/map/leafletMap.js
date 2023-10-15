@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet'
 import Papa from 'papaparse';
@@ -12,16 +12,19 @@ delete L.Icon.Default.prototype._getIconUrl;
 
 function LeafletMap({ residencesDatas, onMarkerClick }) {
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const mapRef = useRef();
 
   const handleMarkerClick = (marker) => {
     setSelectedMarker(marker);
     if (onMarkerClick)
       onMarkerClick(marker);
+      if (mapRef.current)
+        mapRef.current.setView([marker.latitude, marker.longitude], 15);
   };
 
   return (
     <div>
-      <MapContainer center={[43.6065089, 3.8917325]} zoom={13} minZoom={11} maxZoom={18} style={{ height: '90vh', width: '100%' }}>
+      <MapContainer ref={mapRef} center={[43.6065089, 3.8917325]} zoom={13} minZoom={11} maxZoom={18} style={{ height: '90vh', width: '100%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
