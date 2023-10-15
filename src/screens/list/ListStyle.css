@@ -4,7 +4,7 @@
   font-family: "Inter", sans-serif;
 }
 
-.container {
+.containerList {
   display: flex;
   flex-direction: column;
   align-items: center;

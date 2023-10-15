@@ -32,6 +32,24 @@
     background: #F0F0F0;
   }
 
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+}
+
+.backIcon {
+  width: 30px;
+  height: 30px;
+}
+
+.backName {
+  color: rgba(0, 0, 0, 0.40);
+}
+
 .left-side {
   flex: 1;
   border-radius: 25px;

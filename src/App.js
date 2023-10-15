@@ -12,13 +12,13 @@ import ResidenceScreen from './screens/dashboard/ResidenceScreen';
 import ListScreen from './screens/list/ListScreen';
 
 
-
 function App() {
   const [residencesDatas, setResidencesDatas] = useState([]);
   const [claimDatas19_20, setClaimDatas19_20] = useState([]);
   const [claimDatas21_22, setClaimDatas21_22] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [followedResidences, setFollowedResidences] = useState([]);
+  const [showListView, setShowListView] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -104,6 +104,14 @@ function App() {
     setSelectedMarker(marker);
   };
 
+  const handleBackToDashboard = () => {
+    setSelectedMarker(null);
+  };
+
+  const handleShowListView = () => {
+    setShowListView(true);
+  };  
+
   return (
     <div className="App">
       <div>
@@ -116,24 +124,32 @@ function App() {
         sx={{ bgcolor: '#fff', height: '100vh' }}
       >
         <Grid item xs={7}>
-          {selectedMarker ? (
-            <ResidenceScreen
-              residencesDatas={residencesDatas}
-              selectedResidence={selectedMarker}
-              followedResidences={followedResidences}
-              setFollowedResidences={setFollowedResidences}
-            />
-          ) : (
-            <ListScreen
-              residencesDatas={residencesDatas}
-              claimDatas19_20={claimDatas19_20}
-              claimDatas21_22={claimDatas21_22}
-            />
-          )}
+        {selectedMarker ? (
+          <ResidenceScreen
+            residencesDatas={residencesDatas}
+            selectedResidence={selectedMarker}
+            followedResidences={followedResidences}
+            setFollowedResidences={setFollowedResidences}
+            onBackToDashboard={handleBackToDashboard}
+          />
+        ) : showListView ? (
+          <ListScreen
+            residencesDatas={residencesDatas}
+            onMarkerClick={handleMarkerClick}
+            followedResidences={followedResidences}
+          />
+        ) : (
+          <DashboardScreen
+            residencesDatas={residencesDatas}
+            claimDatas19_20={claimDatas19_20}
+            claimDatas21_22={claimDatas21_22}
+            onViewChange={handleShowListView}
+          />
+        )}
         </Grid>
 
         <Grid item xs={4} sx={{ bgcolor: '#eeeeee', height: '90vh', borderRadius: 10, overflow: 'hidden' }}>
-          <Paper >
+          <Paper>
             <LeafletMap residencesDatas={residencesDatas} onMarkerClick={handleMarkerClick} followedResidences={followedResidences} />
           </Paper>
         </Grid>

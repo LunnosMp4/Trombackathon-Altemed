@@ -89,7 +89,7 @@ const calculateClaimsPerSector = (claimsData, residencesData) => {
 
 
 
-const DashboardScreen = ({ residencesDatas, claimDatas19_20, claimDatas21_22 }) => {
+const DashboardScreen = ({ residencesDatas, claimDatas19_20, claimDatas21_22, onViewChange }) => {
 
   const totalClaimsPerSector19_20 = calculateClaimsPerSector(claimDatas19_20, residencesDatas);
   const totalClaimsPerSector21_22 = calculateClaimsPerSector(claimDatas21_22, residencesDatas);
@@ -113,9 +113,14 @@ const DashboardScreen = ({ residencesDatas, claimDatas19_20, claimDatas21_22 }) 
                 <ListItemText primary="Secteur" component="a" href="#simple-list"/>
               </ListItemButton>
             </ListItem>
-            <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50 }}>
+            <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50, mr: 2 }}>
               <ListItemButton sx={{ borderRadius: 10 }}>
                 <ListItemText primary="Urgence" component="b" href="#simple-list"/>
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding sx={{ bgcolor: '#eeeeee', borderRadius: 10, height: 50 }}>
+              <ListItemButton onClick={onViewChange} sx={{ borderRadius: 10 }}>
+                <ListItemText primary="LISTVIEW" component="b" href="#simple-list"/>
               </ListItemButton>
             </ListItem>
           </List>

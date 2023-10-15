@@ -66,7 +66,7 @@ const ListScreen = ({ residencesDatas }) => {
   });
 
   return (
-    <div className="container">
+    <div className="containerList">
       <div className="headerr">
         <div className="navbar">
           <img className="avatar" src="https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png" alt="User Avatar" />
