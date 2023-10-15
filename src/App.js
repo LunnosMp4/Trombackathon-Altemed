@@ -13,6 +13,7 @@ import ResidenceScreen from './screens/dashboard/ResidenceScreen';
 function App() {
   const [residencesDatas, setResidencesDatas] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [followedResidences, setFollowedResidences] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,7 +80,12 @@ function App() {
       >
         <Grid item xs={7}>
           {selectedMarker ? (
-            <ResidenceScreen residencesDatas={residencesDatas} selectedResidence={selectedMarker} />
+            <ResidenceScreen
+              residencesDatas={residencesDatas}
+              selectedResidence={selectedMarker}
+              followedResidences={followedResidences}
+              setFollowedResidences={setFollowedResidences}
+            />
           ) : (
             <DashboardScreen residencesDatas={residencesDatas} />
           )}
@@ -87,7 +93,7 @@ function App() {
 
         <Grid item xs={4} sx={{ bgcolor: '#eeeeee', height: '90vh', borderRadius: 10, overflow: 'hidden' }}>
           <Paper >
-            <LeafletMap residencesDatas={residencesDatas} onMarkerClick={handleMarkerClick} />
+            <LeafletMap residencesDatas={residencesDatas} onMarkerClick={handleMarkerClick} followedResidences={followedResidences} />
           </Paper>
         </Grid>
 

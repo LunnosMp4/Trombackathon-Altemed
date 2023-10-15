@@ -10,6 +10,28 @@
   width: 60vw;
 }
 
+.header {
+  flex: 1;
+  display: inline-flex;
+  width: 100%;
+}
+
+.followButton {
+  display: flex;
+  margin-left: auto;
+  padding: 0px 10px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid #DCDCDC;
+  background: #F8F8F8;
+  height: fit-content;
+}
+
+  .followButton:hover {
+    background: #F0F0F0;
+  }
+
 .left-side {
   flex: 1;
   border-radius: 25px;
@@ -48,9 +70,4 @@ h3 {
 
 .content-section {
   background: red;
-}
-
-.footer-section {
-  background: yellow;
-  height: 100px;
 }

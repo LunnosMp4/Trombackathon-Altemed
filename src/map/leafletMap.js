@@ -10,7 +10,7 @@ import './leafletMap.css'
 
 delete L.Icon.Default.prototype._getIconUrl;
 
-function LeafletMap({ residencesDatas, onMarkerClick }) {
+function LeafletMap({ residencesDatas, onMarkerClick, followedResidences }) {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const mapRef = useRef();
 
@@ -36,7 +36,7 @@ function LeafletMap({ residencesDatas, onMarkerClick }) {
             key={index}
             position={[marker.latitude, marker.longitude]}
             eventHandlers={{ click: () => handleMarkerClick(marker) }}
-            icon={ selectedMarker && selectedMarker.id === marker.id ? activeMarker : defaultMarker }
+            icon={ selectedMarker && selectedMarker.id === marker.id ? activeMarker : followedResidences.includes(marker.id) ? yellowMarker : defaultMarker}
           >
           </Marker>
         ))}
