@@ -3,10 +3,55 @@ import { Grid } from '@mui/material';
 
 import '../../style/ResidenceScreen.css';
 import IconAndText from './widgets/iconAndText';
+import Complaints from './widgets/complaints';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding, faTag, faTriangleExclamation, faTrowelBricks, faScrewdriverWrench, faEnvelope, faEnvelopeOpen, faPeopleGroup, faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 
 const ResidenceScreen = ({ selectedResidence, followedResidences, setFollowedResidences, onBackToDashboard, claimDatas21_22 }) => {
+  const filteredComplaints = claimDatas21_22.filter((claim) => {
+    const id = claim.id.replace(/^0+/, '');
+    return id === selectedResidence.id;
+  });
+
+  const typeCounts = filteredComplaints.reduce((counts, claim) => {
+    const type = claim.type;
+    counts[type] = (counts[type] || 0) + 1;
+    return counts;
+  }, {});
+
+  const calculateImportance = (type, resolutionTime) => {
+    // Define the importance priority order
+    const importanceOrder = {
+      'Sécurité': 3, 'Santé / Hygiène': 3, 'Désinsec/Dérat/Désinfect': 3, 'Infiltration Etanchéité': 3,
+      'Eau Usée vanne pluviale': 3, 'Electricité': 3, 'Ascenseur': 3, 'Interphone/Portail': 3, 'Impayés': 3,
+      'Troubles de voisinage': 2, 'Facturation et Régul': 2, 'Gestion Clientèle': 2, 'Plomberie': 2,
+      'Demande RDV Internet': 2, 'Télévision': 2, 'Serrurerie': 2, 'Cadre de vie': 2, 'Espaces Verts': 2,
+      'Menuiserie': 1, 'Peinture': 1, 'Maçonnerie': 1, 'Nettoyage': 1, 'Fournitures/Location': 1,
+      'VMC': 1, 'Déménagement': 1, 'Epaves': 1, 'Câble': 1, 'Reprise DI': 1, 'Demande Diagnostic TEST': 1,
+    };
+
+    const importanceLevel = importanceOrder[type] || 0;
+
+    // If resolution time is greater than 60 days, set importance to the maximum
+    if (resolutionTime > 60) {
+      return Math.max(importanceLevel, 3);
+    }
+
+    // If resolution time is greater than 30 days, increase importance by 1
+    if (resolutionTime > 30) {
+      return Math.min(importanceLevel + 1, 3);
+    }
+
+    return importanceLevel;
+  };
+
+  const complaintArray = Object.keys(typeCounts).map((type) => ({
+    type,
+    count: typeCounts[type],
+    importance: calculateImportance(type, 30),
+  }));
+
+  complaintArray.sort((a, b) => b.importance - a.importance);
 
   const formatText = (str) => {
     return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
@@ -74,13 +119,14 @@ const ResidenceScreen = ({ selectedResidence, followedResidences, setFollowedRes
           </Grid> 
         </Grid>
         <Grid item xs={12} >
-          <p>b</p>
-          <p>o</p>
-          <p>n</p>
-          <p>j</p>
-          <p>o</p>
-          <p>u</p>
-          <p>r</p>
+           <div className='complaints'>
+              <h2 style={{marginLeft: '40px'}}>Toutes les plaintes</h2>
+              <ul>
+                {complaintArray.map((complaint, index) => (
+                  <Complaints key={index} type={complaint.type} count={complaint.count} importance={complaint.importance} />
+                ))}
+              </ul>
+            </div>
         </Grid>
       </Grid>
     </div>

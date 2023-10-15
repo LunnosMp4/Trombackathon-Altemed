@@ -77,7 +77,7 @@ function App() {
                 id: marker['Code Résidence ACM'],
                 claimId: marker['Code Réclamation ACM'],
                 category: marker[`Catégorie d'Affaire`],
-                type: marker[`Type d'Affaire`],
+                type: marker[`Type d'Affaires`],
                 origin: marker[`Origine de l'Affaire`],
                 agencyCode: marker[`Code Agence ACM`],
                 year: marker[`Année`],
@@ -104,7 +104,7 @@ function App() {
                 id: marker['Code Résidence ACM'],
                 claimId: marker['Code Réclamation ACM'],
                 category: marker['Catégorie d\'Affaire'],
-                type: marker['Type d\'Affaire'],
+                type: marker['Type d\'Affaires'],
                 origin: marker['Origine de l\'Affaire'],
                 agencyCode: marker['Code Agence ACM'],
                 year: marker['Année'],
@@ -112,8 +112,6 @@ function App() {
                 commitment: marker[`Engagement(Réparations)`],
                 resolutionTime: marker[`Délai de résolution en Jours`],
               }));
-
-              console.log(parsedClaim21_22)
 
               setClaimDatas21_22(parsedClaim21_22);
             }

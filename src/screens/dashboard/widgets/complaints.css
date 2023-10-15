@@ -1,0 +1,11 @@
+.text-high-importance {
+  background-color: rgba(255, 0, 0, 0.3);
+}
+
+.text-medium-importance {
+  background-color: rgba(255, 255, 3, 0.3);
+}
+
+.text-low-importance {
+  background-color: rgba(0, 255, 0, 0.3);
+}
