@@ -5,7 +5,7 @@ import '../../style/ResidenceScreen.css';
 import IconAndText from './widgets/iconAndText';
 import Complaints from './widgets/complaints';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBuilding, faTag, faTriangleExclamation, faTrowelBricks, faScrewdriverWrench, faEnvelope, faEnvelopeOpen, faPeopleGroup, faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding, faTag, faTriangleExclamation, faTrowelBricks, faScrewdriverWrench, faEnvelope, faEnvelopeOpen, faPeopleGroup, faBell } from '@fortawesome/free-solid-svg-icons';
 
 const ResidenceScreen = ({ selectedResidence, followedResidences, setFollowedResidences, onBackToDashboard, claimDatas21_22 }) => {
   const filteredComplaints = claimDatas21_22.filter((claim) => {
@@ -18,6 +18,8 @@ const ResidenceScreen = ({ selectedResidence, followedResidences, setFollowedRes
     counts[type] = (counts[type] || 0) + 1;
     return counts;
   }, {});
+
+  let importance3Count = 0;
 
   const calculateImportance = (type, resolutionTime) => {
     // Define the importance priority order
@@ -32,18 +34,24 @@ const ResidenceScreen = ({ selectedResidence, followedResidences, setFollowedRes
 
     const importanceLevel = importanceOrder[type] || 0;
 
-    // If resolution time is greater than 60 days, set importance to the maximum
     if (resolutionTime > 60) {
       return Math.max(importanceLevel, 3);
     }
 
-    // If resolution time is greater than 30 days, increase importance by 1
     if (resolutionTime > 30) {
       return Math.min(importanceLevel + 1, 3);
     }
 
     return importanceLevel;
   };
+
+  //count the number of importance 3 and stock it in importance3Count
+  Object.keys(typeCounts).forEach((type) => {
+    const importance = calculateImportance(type, 30);
+    if (importance === 3) {
+      importance3Count += typeCounts[type];
+    }
+  });
 
   const complaintArray = Object.keys(typeCounts).map((type) => ({
     type,
@@ -88,7 +96,7 @@ const ResidenceScreen = ({ selectedResidence, followedResidences, setFollowedRes
     <div>
     <div className='backButton' onClick={onBackToDashboard}>
       <img className='backIcon' src={require('../../icons/arrow_back.png')}/>
-      <h2 class="backName">Retour</h2>
+      <h2 class="backName">Dashboard</h2>
     </div>
     <div className='start'>
       <Grid container sx={{ bgcolor: '#eeeeee', borderRadius: 10}}>
@@ -116,6 +124,7 @@ const ResidenceScreen = ({ selectedResidence, followedResidences, setFollowedRes
               <IconAndText icon={faTrowelBricks} text={`Date de construction : ${formatDate(selectedResidence.constructionDate)}`} />
               <IconAndText icon={faScrewdriverWrench} text={`Date de renovation : ${formatDate(selectedResidence.renovationDate)}`} />
               <IconAndText icon={faPeopleGroup} text={`Nombre de Résident : ${getAllResidents(selectedResidence)}`} />
+              <IconAndText icon={faBell} text={`Incidents en urgence : ${importance3Count}`} />
           </Grid> 
         </Grid>
         <Grid item xs={12} >
