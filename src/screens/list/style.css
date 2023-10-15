@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css?family=Inter");
+
+* {
+  font-family: "Inter", sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  gap: 20px;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  align-self: stretch;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  gap: 30px;
+  align-self: stretch;
+  /* background: red; */
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 100px;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 20px;
+  flex: 1 0 0;
+  border-radius: 16px;
+  background: #F6F9FE;
+}
+
+input {
+  display: flex;
+  flex: 1 0 0;
+  padding: 10px;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 16px;
+}
+
+.dropdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  outline: none;
+  border: none;
+  border-radius: 16px;
+  border: 1px solid #EDF2FA;
+}
+
+.dropdown:hover {
+  outline: none;
+  border: none;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  padding: 10px;
+}
+
+.residence-card {
+  display: flex;
+  flex-direction: column;
+  width: 490px;
+  height: 149px;
+  padding: 10px 20px;
+  align-items: flex-start;
+  height: auto;
+  align-self: stretch;
+  margin: 10px;
+  border-radius: 16px;
+  background: #F6F9FE;
+}
+
+.icon-chips {
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+}
+
+.chips-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.chips-filter {
+  display: flex;
+  padding-left: 5px;
+  padding-right: 5px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+}
+
+.chips {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  padding: 5px;
+}
+
+.chips, .chips-filter p {
+  color: #E8E8E8;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.residence-name {
+  color: #000;
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  height: 10px;
+}
+
+.residence-address {
+  color: rgba(0, 0, 0, 0.60);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.urgent {
+  background: #D47272;
+}
+
+.in-progress {
+  background: #BEA36F;
+}
+
+.done {
+  background: #6FBE8E;
+}
+
+.sector {
+  background: #7793C4;
+}
+
+.neutral {
+  background: #8E99C7;
+  padding: 5px 15px 5px 15px;
+}
+
+.neutral-filter {
+  background: #8E99C7;
+  padding: 0 15px 0 15px;
+}
