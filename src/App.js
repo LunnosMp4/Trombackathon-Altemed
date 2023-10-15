@@ -139,6 +139,10 @@ function App() {
     setShowSectorView(false);
   };
 
+  const handleHideListView = () => {
+    setShowListView(false);
+  };
+
   const handleShowListView = () => {
     setShowListView(true);
   };
@@ -171,8 +175,8 @@ function App() {
         ) : showListView ? (
           <ListScreen
             residencesDatas={residencesDatas}
-            onMarkerClick={handleMarkerClick}
-            followedResidences={followedResidences}
+            onBackToDashboard={handleHideListView}
+            onCardClick={handleMarkerClick}
           />
         ) : showSectorView ? (
           <SectorScreen

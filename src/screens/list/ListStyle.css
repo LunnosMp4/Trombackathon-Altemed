@@ -4,6 +4,24 @@
   font-family: "Inter", sans-serif;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #F6F9FE;
+  border-radius: 30px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #8E99C7;
+  border-radius: 30px;
+  height: 30px;
+}
+
 .containerList {
   display: flex;
   flex-direction: column;
@@ -79,6 +97,10 @@ input {
   padding: 10px;
 }
 
+.list-card {
+  overflow-y: scroll;
+}
+
 .residence-card {
   display: flex;
   flex-direction: column;
@@ -91,6 +113,7 @@ input {
   margin: 10px;
   border-radius: 16px;
   background: #F6F9FE;
+  cursor: pointer;
 }
 
 .icon-chips {
@@ -112,6 +135,7 @@ input {
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .chips {
@@ -120,6 +144,7 @@ input {
   align-items: center;
   border-radius: 12px;
   padding: 5px;
+  cursor: pointer;
 }
 
 .chips, .chips-filter p {
@@ -143,6 +168,12 @@ input {
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 1px;
+}
+
+.icon-click {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
 }
 
 .urgent {

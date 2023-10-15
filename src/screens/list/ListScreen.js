@@ -1,24 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, FormControl, MenuItem, Select } from '@mui/material';
 import './ListStyle.css';
-import arrowDropDown from '../../icons/arrow_drop_down.png';
-import arrowDropLeft from '../../icons/arrow_left.png';
-import arrowDropRight from '../../icons/arrow_right.png';
-import cancel_rounded from '../../icons/cancel_rounded.png';
+import arrowBack from '../../icons/arrow_back.png';
 import close from '../../icons/close.png';
 import check from '../../icons/check.png';
 import hourglass from '../../icons/hourglass.png';
 import notifications from '../../icons/notifications.png';
 import swap_vert from '../../icons/swap_vert.png';
 import domain from "../../icons/domain.png";
+import cancel_rounded from "../../icons/cancel_rounded.png";
 
-const ListScreen = ({ residencesDatas }) => {
+const ListScreen = ({ residencesDatas, onBackToDashboard, onCardClick }) => {
   const formatText = (str) => {
     return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
 
-  const ITEMS_PER_PAGE = 10;
-  const [currentPage, setCurrentPage] = useState(1);
   const [residences, setResidences] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');
@@ -27,6 +23,11 @@ const ListScreen = ({ residencesDatas }) => {
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
   }
+
+  const handleCardClick = (residence) => {
+    if (onCardClick)
+      onCardClick(residence);
+  };
 
   const handleCancelSearch = () => {
     setSearchQuery('');
@@ -69,7 +70,7 @@ const ListScreen = ({ residencesDatas }) => {
     <div className="containerList">
       <div className="headerr">
         <div className="navbar">
-          <img className="avatar" src="https://static.vecteezy.com/system/resources/previews/019/896/008/original/male-user-avatar-icon-in-flat-design-style-person-signs-illustration-png.png" alt="User Avatar" />
+          <img onClick={onBackToDashboard} className='icon-click' src={arrowBack}/>
           <div className="search-bar">
             <input
               type="text"
@@ -126,6 +127,15 @@ const ListScreen = ({ residencesDatas }) => {
           </FormControl>
         </div>
         <div className='chips-container'>
+          <div className='chips-filter urgent'>
+            <img className="icon-chips" src={notifications} alt="Alert" />
+            <p>Urgents</p>
+            <img className="icon-chips" src={cancel_rounded} alt="Cancel" />
+          </div>
+          <div className='chips-filter neutral-filter'>
+            <p>Par odre alphabétiques</p>
+            <img className="icon-chips" src={cancel_rounded} alt="Cancel" />
+          </div>
           <div className='chips-filter neutral-filter'>
             <p>QPV</p>
           </div>
@@ -137,11 +147,17 @@ const ListScreen = ({ residencesDatas }) => {
             <img className="icon-chips" src={hourglass} alt="Sector" />
             <p>Engagés</p>
           </div>
+          <div className='chips-filter neutral-filter'>
+            <p>Les plus récents</p>
+          </div>
+          <div className='chips-filter neutral-filter'>
+            <p>...</p>
+          </div>
         </div>
       </div>
-      <Grid container className=''>
+      <Grid container className='list-card'>
           {sortedResidences.map(residence => (
-            <div className='residence-card'>
+            <div onClick={() => handleCardClick(residence)} className='residence-card'>
               <div className='chips-container'>
                 <div className='chips urgent'>
                   <img className="icon-chips" src={notifications} alt="Alert" />

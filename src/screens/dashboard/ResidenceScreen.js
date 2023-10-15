@@ -4,9 +4,9 @@ import { Grid } from '@mui/material';
 import '../../style/ResidenceScreen.css';
 import IconAndText from './widgets/iconAndText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBuilding, faTag, faTriangleExclamation, faTrowelBricks, faScrewdriverWrench, faEnvelope, faEnvelopeOpen, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding, faTag, faTriangleExclamation, faTrowelBricks, faScrewdriverWrench, faEnvelope, faEnvelopeOpen, faPeopleGroup, faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
 
-const ResidenceScreen = ({ residencesDatas, selectedResidence, followedResidences, setFollowedResidences, onBackToDashboard, claimDatas21_22 }) => {
+const ResidenceScreen = ({ selectedResidence, followedResidences, setFollowedResidences, onBackToDashboard, claimDatas21_22 }) => {
 
   const formatText = (str) => {
     return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
@@ -43,7 +43,7 @@ const ResidenceScreen = ({ residencesDatas, selectedResidence, followedResidence
     <div>
     <div className='backButton' onClick={onBackToDashboard}>
       <img className='backIcon' src={require('../../icons/arrow_back.png')}/>
-      <h2 class="backName">Dashboard</h2>
+      <h2 class="backName">Retour</h2>
     </div>
     <div className='start'>
       <Grid container sx={{ bgcolor: '#eeeeee', borderRadius: 10}}>
