@@ -10,11 +10,13 @@ import './leafletMap.css'
 
 delete L.Icon.Default.prototype._getIconUrl;
 
-function LeafletMap({ residencesDatas }) {
+function LeafletMap({ residencesDatas, onMarkerClick }) {
   const [selectedMarker, setSelectedMarker] = useState(null);
 
   const handleMarkerClick = (marker) => {
     setSelectedMarker(marker);
+    if (onMarkerClick)
+      onMarkerClick(marker);
   };
 
   return (

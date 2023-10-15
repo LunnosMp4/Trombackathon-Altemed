@@ -6,9 +6,13 @@ import { Grid, Paper,  } from '@mui/material';
 import dataCsvPath from './datas/Résidences.csv'
 import Dashboard from './screens/dashboard/DashboardScreen';
 import DashboardScreen from './screens/dashboard/DashboardScreen';
+import ResidenceScreen from './screens/dashboard/ResidenceScreen';
+
+
 
 function App() {
   const [residencesDatas, setResidencesDatas] = useState([]);
+  const [selectedMarker, setSelectedMarker] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +36,7 @@ function App() {
                 zip: marker['Code postal'],
                 city: marker.Ville,
                 sector: marker.Secteur,
+                sensibleZone: marker['Zone_Sensible'],
                 constructionDate: marker['Date de Construction'],
                 acquisitionDate: marker['Date d\'Acquisition'],
                 renovationDate: marker['Prochaine Rénovation'],
@@ -57,6 +62,10 @@ function App() {
     fetchData();
   }, []);
 
+  const handleMarkerClick = (marker) => {
+    setSelectedMarker(marker);
+  };
+
   return (
     <div className="App">
       <div>
@@ -69,12 +78,16 @@ function App() {
         sx={{ bgcolor: '#fff', height: '100vh' }}
       >
         <Grid item xs={7}>
-          <DashboardScreen residencesDatas={residencesDatas} />
+          {selectedMarker ? (
+            <ResidenceScreen residencesDatas={residencesDatas} selectedResidence={selectedMarker} />
+          ) : (
+            <DashboardScreen residencesDatas={residencesDatas} />
+          )}
         </Grid>
 
         <Grid item xs={4} sx={{ bgcolor: '#eeeeee', height: '90vh', borderRadius: 10, overflow: 'hidden' }}>
           <Paper >
-            <LeafletMap residencesDatas={residencesDatas} />
+            <LeafletMap residencesDatas={residencesDatas} onMarkerClick={handleMarkerClick} />
           </Paper>
         </Grid>
 
