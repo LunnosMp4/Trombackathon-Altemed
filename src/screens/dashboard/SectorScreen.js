@@ -53,11 +53,20 @@ function CircularProgressWithLabel(props) {
           variant="caption"
           component="div"
           color="text.secondary"
-          sx={{ whiteSpace: 'pre-line' }}
+          sx={{
+            whiteSpace: 'pre-line',
+            fontSize: '15px',  // Taille de la police par défaut
+            fontWeight: 'bold',
+            justifyItems: 'center',
+            alignItems: 'center',
+            alignContent: 'center'
+          }}
         >
           {`${props.sector} \n`}
-          {`${Math.round(props.value)} Réclamations`}
+          <span style={{ fontSize: '24px' }}>{Math.round(props.value)}</span>  {/* Taille de la police augmentée */}
+          {`\nRéclamations`}
         </Typography>
+
       </Box>
     </Box>
   );
