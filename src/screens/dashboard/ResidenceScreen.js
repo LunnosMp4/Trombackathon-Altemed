@@ -4,9 +4,9 @@ import { Grid } from '@mui/material';
 import '../../style/ResidenceScreen.css';
 import IconAndText from './widgets/iconAndText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBuilding, faTag, faTriangleExclamation, faTrowelBricks, faScrewdriverWrench, faEnvelope, faEnvelopeOpen, faPeopleGroup, faArrowLeftLong } from '@fortawesome/free-solid-svg-icons';
+import { faBuilding, faTag, faTriangleExclamation, faTrowelBricks, faScrewdriverWrench, faEnvelope, faEnvelopeOpen, faPeopleGroup } from '@fortawesome/free-solid-svg-icons';
 
-const ResidenceScreen = ({ residencesDatas, selectedResidence, followedResidences, setFollowedResidences, onBackToDashboard }) => {
+const ResidenceScreen = ({ residencesDatas, selectedResidence, followedResidences, setFollowedResidences, onBackToDashboard, claimDatas21_22 }) => {
 
   const formatText = (str) => {
     return str.toLowerCase().split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');

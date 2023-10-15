@@ -58,35 +58,7 @@ function App() {
                 sup75: marker['>=75'],
               }));
 
-              const parsedClaim19_20 = result.data.map((marker) => ({
-                id: marker['Code Résidence ACM'],
-                claimId: marker['Code Réclamation ACM'],
-                category: marker[`Catégorie d'Affaire`],
-                type: marker[`Type d'Affaire`],
-                origin: marker[`Origine de l'Affaire`],
-                agencyCode: marker[`Code Agence ACM`],
-                year: marker[`Année`],
-                month: marker[`Mois`],
-                commitment: marker[`Engagement(Réparations)`],
-                resolutionTime: marker[`Délai de Résolution`],
-              }));
-
-              const parsedClaim21_22 = result.data.map((marker) => ({
-                id: marker['Code Résidence ACM'],
-                claimId: marker['Code Réclamation ACM'],
-                category: marker[`Catégorie d'Affaire`],
-                type: marker[`Type d'Affaire`],
-                origin: marker[`Origine de l'Affaire`],
-                agencyCode: marker[`Code Agence ACM`],
-                year: marker[`Année`],
-                month: marker[`Mois`],
-                commitment: marker[`Engagement(Réparations)`],
-                resolutionTime: marker[`Délai de Résolution`],
-              }));
-
               setResidencesDatas(parsedResidences);
-              setClaimDatas19_20(parsedClaim19_20);
-              setClaimDatas21_22(parsedClaim21_22);
             }
           });
         } else {
@@ -94,7 +66,7 @@ function App() {
         }
 
         if (response2.ok) {
-          const csvData2 = await response.text();
+          const csvData2 = await response2.text();
 
           Papa.parse(csvData2, {
             header: true,
@@ -121,7 +93,7 @@ function App() {
           console.error('Error fetching CSV data. Response status:', response.status);
         }
         if (response3.ok) {
-          const csvData3 = await response.text();
+          const csvData3 = await response3.text();
 
           Papa.parse(csvData3, {
             header: true,
@@ -131,15 +103,17 @@ function App() {
               const parsedClaim21_22 = result.data.map((marker) => ({
                 id: marker['Code Résidence ACM'],
                 claimId: marker['Code Réclamation ACM'],
-                category: marker[`Catégorie d'Affaire`],
-                type: marker[`Type d'Affaire`],
-                origin: marker[`Origine de l'Affaire`],
-                agencyCode: marker[`Code Agence ACM`],
-                year: marker[`Année`],
-                month: marker[`Mois`],
+                category: marker['Catégorie d\'Affaire'],
+                type: marker['Type d\'Affaire'],
+                origin: marker['Origine de l\'Affaire'],
+                agencyCode: marker['Code Agence ACM'],
+                year: marker['Année'],
+                month: marker['Mois'],
                 commitment: marker[`Engagement(Réparations)`],
-                resolutionTime: marker[`Délai de Résolution`],
+                resolutionTime: marker[`Délai de résolution en Jours`],
               }));
+
+              console.log(parsedClaim21_22)
 
               setClaimDatas21_22(parsedClaim21_22);
             }
@@ -192,6 +166,7 @@ function App() {
             followedResidences={followedResidences}
             setFollowedResidences={setFollowedResidences}
             onBackToDashboard={handleBackToDashboard}
+            claimDatas21_22={claimDatas21_22}
           />
         ) : showListView ? (
           <ListScreen
