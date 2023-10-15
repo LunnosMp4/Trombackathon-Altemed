@@ -10,6 +10,7 @@ import dataCsvPath2021_2022 from './datas/Réclamations_2021_2022.csv'
 import DashboardScreen from './screens/dashboard/DashboardScreen';
 import ResidenceScreen from './screens/dashboard/ResidenceScreen';
 import ListScreen from './screens/list/ListScreen';
+import SectorScreen from './screens/dashboard/SectorScreen';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [followedResidences, setFollowedResidences] = useState([]);
   const [showListView, setShowListView] = useState(false);
+  const [showSectorView, setShowSectorView] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,10 +29,8 @@ function App() {
         const response2 = await fetch(dataCsvPath2019_2020);
         const response3 = await fetch(dataCsvPath2021_2022);
 
-        if (response.ok && response2.ok && response3.ok) {
+        if (response.ok) {
           const csvData = await response.text();
-          const csvData2 = await response2.text();
-          const csvData3 = await response3.text();
 
           Papa.parse(csvData, {
             header: true,
@@ -92,6 +92,61 @@ function App() {
         } else {
           console.error('Error fetching CSV data. Response status:', response.status);
         }
+
+        if (response2.ok) {
+          const csvData2 = await response.text();
+
+          Papa.parse(csvData2, {
+            header: true,
+            delimiter: ',',
+            complete: (result) => {
+
+              const parsedClaim19_20 = result.data.map((marker) => ({
+                id: marker['Code Résidence ACM'],
+                claimId: marker['Code Réclamation ACM'],
+                category: marker[`Catégorie d'Affaire`],
+                type: marker[`Type d'Affaire`],
+                origin: marker[`Origine de l'Affaire`],
+                agencyCode: marker[`Code Agence ACM`],
+                year: marker[`Année`],
+                month: marker[`Mois`],
+                commitment: marker[`Engagement(Réparations)`],
+                resolutionTime: marker[`Délai de Résolution`],
+              }));
+
+              setClaimDatas19_20(parsedClaim19_20);
+            }
+          });
+        } else {
+          console.error('Error fetching CSV data. Response status:', response.status);
+        }
+        if (response3.ok) {
+          const csvData3 = await response.text();
+
+          Papa.parse(csvData3, {
+            header: true,
+            delimiter: ',',
+            complete: (result) => {
+
+              const parsedClaim21_22 = result.data.map((marker) => ({
+                id: marker['Code Résidence ACM'],
+                claimId: marker['Code Réclamation ACM'],
+                category: marker[`Catégorie d'Affaire`],
+                type: marker[`Type d'Affaire`],
+                origin: marker[`Origine de l'Affaire`],
+                agencyCode: marker[`Code Agence ACM`],
+                year: marker[`Année`],
+                month: marker[`Mois`],
+                commitment: marker[`Engagement(Réparations)`],
+                resolutionTime: marker[`Délai de Résolution`],
+              }));
+
+              setClaimDatas21_22(parsedClaim21_22);
+            }
+          });
+        } else {
+          console.error('Error fetching CSV data. Response status:', response.status);
+        }
       } catch (error) {
         console.error('Error fetching or parsing CSV data:', error);
       }
@@ -106,11 +161,17 @@ function App() {
 
   const handleBackToDashboard = () => {
     setSelectedMarker(null);
+    setShowListView(false);
+    setShowSectorView(false);
   };
 
   const handleShowListView = () => {
     setShowListView(true);
-  };  
+  };
+
+  const handleShowSectorView = () => {
+    setShowSectorView(true);
+  }
 
   return (
     <div className="App">
@@ -138,12 +199,21 @@ function App() {
             onMarkerClick={handleMarkerClick}
             followedResidences={followedResidences}
           />
+        ) : showSectorView ? (
+          <SectorScreen
+            residencesDatas={residencesDatas}
+            claimDatas19_20={claimDatas19_20}
+            claimDatas21_22={claimDatas21_22}
+            onDashboardChange={handleBackToDashboard}
+            onListViewChange={handleShowListView}
+          />
         ) : (
           <DashboardScreen
             residencesDatas={residencesDatas}
             claimDatas19_20={claimDatas19_20}
             claimDatas21_22={claimDatas21_22}
-            onViewChange={handleShowListView}
+            onListViewChange={handleShowListView}
+            onSectorChange={handleShowSectorView}
           />
         )}
         </Grid>
