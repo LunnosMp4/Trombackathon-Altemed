@@ -8,15 +8,6 @@ function BarChart({ chartData }) {
       data={chartData}
       options={{
         responsive: true,
-        plugins: {
-          legend: {
-            labels: {
-              font: {
-                size: 30, // Ajuste la taille de la police de la légende
-              },
-            },
-          },
-        },
         scales: {
           x: {
             ticks: {
@@ -48,6 +39,13 @@ function BarChart({ chartData }) {
           },
         },
         plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 30, // Ajuste la taille de la police de la légende
+              },
+            },
+          },
           tooltip: {
             titleFont: {
               size: 18, // Ajuste la taille de la police du titre de l'info-bulle
