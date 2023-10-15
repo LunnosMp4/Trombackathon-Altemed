@@ -9,6 +9,7 @@ import dataCsvPath2021_2022 from './datas/Réclamations_2021_2022.csv'
 
 import DashboardScreen from './screens/dashboard/DashboardScreen';
 import ResidenceScreen from './screens/dashboard/ResidenceScreen';
+import ListScreen from './screens/list/ListScreen';
 
 
 
@@ -123,7 +124,7 @@ function App() {
               setFollowedResidences={setFollowedResidences}
             />
           ) : (
-            <DashboardScreen
+            <ListScreen
               residencesDatas={residencesDatas}
               claimDatas19_20={claimDatas19_20}
               claimDatas21_22={claimDatas21_22}

@@ -10,13 +10,14 @@
   align-items: center;
   height: 100vh;
   gap: 20px;
-  overflow: hidden;
+  background: transparent;
 }
 
-.header {
+.headerr {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  height: auto;
   gap: 20px;
   align-self: stretch;
 }
@@ -27,7 +28,6 @@
   margin-top: 30px;
   gap: 30px;
   align-self: stretch;
-  /* background: red; */
 }
 
 .avatar {
@@ -82,7 +82,7 @@ input {
 .residence-card {
   display: flex;
   flex-direction: column;
-  width: 490px;
+  width: 480px;
   height: 149px;
   padding: 10px 20px;
   align-items: flex-start;
